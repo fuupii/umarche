@@ -38,7 +38,7 @@ class OwnersController extends Controller
         //     'name' => 'てすと'
         // ]);
         // dd($e_all, $q_get, $q_first, $c_test);
-        $owners = Owner::select('id', 'name', 'email', 'created_at')->get();
+        $owners = Owner::select('id', 'name', 'email', 'created_at')->paginate(3);
 
         return view('admin.owners.index',
         compact('owners'));
@@ -150,7 +150,7 @@ class OwnersController extends Controller
         $expiredOwners = Owner::onlyTrashed()->get();
         return view('admin.expired-owners', compact('expiredOwners'));
         }
-        
+
     public function expiredOwnerDestroy($id) {
         Owner::onlyTrashed()->findOrFail($id)->forceDelete();
         return redirect()
