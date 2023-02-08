@@ -50,8 +50,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->invalidate();
 
-        Log::debug('owner', $request->session()->all());
-
         $request->session()->regenerateToken();
 
         return redirect('/owner');
