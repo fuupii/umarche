@@ -33,8 +33,23 @@
                         </div>
 
                     </form>
+                    <form id="delete_{{ $image->id }}" method="POST" action="{{ route('owner.images.destroy', ['image' => $image->id])}}">
+                        @csrf
+                        @method('delete')
+                            <div class="flex mt-4 p-2 w-full justify-around">
+                            <a href="#" data-id="{{ $image->id }}"onclick="deletePost(this)" type="submit" class="text-white bg-red-400 border-0 py-2 px-8 focus:outline-none hover:bg-red-500 rounded ">削除する</a>
+                            </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        function deletePost(e) {
+            if(confirm('本当に削除してもよろしいですか？')) {
+                document.getElementById('delete_' + e.dataset.id).submit();
+            }
+        }
+    </script>
 </x-app-layout>
